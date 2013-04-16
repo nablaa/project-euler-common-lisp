@@ -1,3 +1,6 @@
+(defun solve ()
+  (largest-prime-factor 600851475143))
+
 (defun largest-prime-factor (n)
   (apply #'max (factors n)))
 

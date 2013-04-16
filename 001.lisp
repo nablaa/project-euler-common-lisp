@@ -1,3 +1,6 @@
+(defun solve ()
+  (sum-numbers 1000))
+
 (defun is-multiple-of-x (n x)
   (= (mod n x) 0))
 
