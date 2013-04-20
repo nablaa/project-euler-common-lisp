@@ -17,4 +17,24 @@
   (reduce #'+ (proper-divisors n)))
 
 (defun proper-divisors (n)
-  (loop :for d :from 1 :below n if (= (mod n d) 0) :collect d))
+  (factors-to-proper-divisors (factors n)))
+
+(defun factors (n)
+  (factor n 2))
+
+(defun factor (n k)
+  (cond ((> (* k k) n) (list n))
+        ((= (mod n k) 0) (cons k (factor (truncate n k) 2)))
+        ((= k 2) (factor n 3))
+        (t (factor n (+ k 2)))))
+
+(defun factors-to-proper-divisors (factors)
+  (let ((self (reduce #'* factors)))
+    (sort (remove self (remove-duplicates (to-proper-divs-acc factors 1))) #'<)))
+
+(defun to-proper-divs-acc (factors num)
+  (if (null factors)
+    (list num)
+    (let ((factor (car factors))
+          (remaining (cdr factors)))
+      (append (to-proper-divs-acc remaining num) (to-proper-divs-acc remaining (* num factor))))))
