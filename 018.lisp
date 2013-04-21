@@ -1,5 +1,5 @@
 (defun solve ()
-  (get-maximum-path-sum (triangle)))
+  (maximize-path (reverse (triangle))))
 
 (defun triangle ()
   '((75)
@@ -18,12 +18,14 @@
     (63 66 04 68 89 53 67 30 73 16 69 87 40 31)
     (04 62 98 27 23 09 70 98 73 93 38 53 60 04 23)))
 
-(defun get-maximum-path-sum (triangle)
-  (get-maximum-path-sum-index triangle 0))
-
-(defun get-maximum-path-sum-index (triangle index)
-  (if (null triangle)
-    0
-    (let ((value (nth index (car triangle))))
-      (+ value (max (get-maximum-path-sum-index (cdr triangle) index)
-                    (get-maximum-path-sum-index (cdr triangle) (+ index 1)))))))
+(defun maximize-path (triangle)
+  (let ((row (car triangle))
+        (remaining (cdr triangle)))
+    (if (= (length row) 1)
+      (car row)
+      (let* ((new-row (car remaining))
+             (rows (cdr remaining))
+             (summed-row (loop :for i :from 0 :below (length new-row)
+                               :collect (+ (nth i new-row)
+                                           (max (nth i row) (nth (+ i 1) row))))))
+        (maximize-path (cons summed-row rows))))))
