@@ -1,3 +1,6 @@
+(defun solve ()
+  (total-letter-count 1000))
+
 (defun total-letter-count (max-n)
   (loop :for n :from 1 :to max-n :sum (letter-count n)))
 

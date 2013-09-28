@@ -1,3 +1,6 @@
+(defun solve ()
+  (count-sundays 1901 2000))
+
 (defun count-sundays (year1 year2)
   (let ((sundays 0))
     (loop :for year :from year1 :to year2 :do

@@ -1,3 +1,6 @@
+(defun solve ()
+  (sum-sieve 2000000))
+
 ; Elegant, but slow
 
 (defun sum-primes-smaller-than (n)
